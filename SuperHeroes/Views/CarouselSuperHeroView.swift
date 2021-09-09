@@ -16,11 +16,9 @@ struct CarouselSuperHeroView: View {
         
         HStack {
             Button(action: {
-                withAnimation {
-                    selectedHero = repository.previousSuperhero(selectedHero)
-                }
+                // TODO: oh no.. Left button is not working 😰
             }, label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: "chevron.right")
                     .font(.system(size: 28.0))
             })
             .opacity(repository.previousSuperhero(selectedHero) == nil ? 0.0 : 1.0)

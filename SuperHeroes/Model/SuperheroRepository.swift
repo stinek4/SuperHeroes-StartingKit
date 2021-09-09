@@ -24,12 +24,7 @@ class SuperheroRepository {
     }
     
     func previousSuperhero(_ currentSuperhero: Superhero?) -> Superhero? {
-        guard let currentSuperhero = currentSuperhero else { return nil }
-        if let index = heroes.firstIndex(of: currentSuperhero), index > 0 {
-            return heroes[index - 1]
-        }
-        
-        return nil
+        // TODO: Oh.. Konstantin forgot to implement yet another method ☹️
     }
     
     func nextSuperhero(_ currentSuperhero: Superhero?) -> Superhero? {
