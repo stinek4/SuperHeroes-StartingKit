@@ -18,7 +18,7 @@ struct SuperHeroesApp: App {
     var body: some Scene {
         WindowGroup {
             // TODO: Oh no! The root element of multipage application has to be wrapped into NavigationView! You read it  https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-programmatic-navigation-in-swiftui for today's lecture
-            ContentView()
+            SelectOpponentView()
             .preferredColorScheme(.dark)
             .accentColor(.white)
         }

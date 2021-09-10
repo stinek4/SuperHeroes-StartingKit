@@ -9,6 +9,8 @@ import SwiftUI
 
 class AddSuperheroViewModel: ObservableObject {
     
+
+    
     // TODO: Oh no! All the content of the add superhero viewModel is gone 😰
     
     // HINT1: You likely want to have some sort of input-validator here for every change of the user input

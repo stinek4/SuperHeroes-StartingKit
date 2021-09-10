@@ -10,8 +10,14 @@ import SwiftUI
 struct SelectOpponentView: View {
     @State private var isShowingAddNewHero = false
     
-    @ObservedObject var viewModel: SelectOpponentViewModel = SelectOpponentViewModel()
-    var repository: SuperheroRepository = SuperheroRepository()
+    @ObservedObject var viewModel: SelectOpponentViewModel
+    var repository: SuperheroRepository
+    
+    init() {
+        let repo = SuperheroRepository()
+        viewModel = SelectOpponentViewModel(repo: repo)
+        repository = repo
+    }
     
     var body: some View {
         ZStack {
@@ -22,7 +28,7 @@ struct SelectOpponentView: View {
                 
                 Spacer()
                 
-                if let you = viewModel.mySuperhero, let opponent = viewModel.opponentSuperhero {
+                if let you = viewModel.mySuperHero, let opponent = viewModel.opponentSuperhero {
                     NavigationLink(destination: BattleView(you: you, opponent: opponent)) {
                         Text("⚔️")
                             .font(.system(size: 76.0))
@@ -38,13 +44,13 @@ struct SelectOpponentView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .padding()
-                CarouselSuperHeroView(selectedHero: $viewModel.mySuperhero, repository: repository)
+                CarouselSuperHeroView(selectedHero: $viewModel.mySuperHero, repository: repository)
             }
             .padding(.vertical)
         }
         .foregroundColor(.white)
         .onAppear() {
-            viewModel.mySuperhero = repository.heroes.first
+            viewModel.mySuperHero = repository.heroes.first
             viewModel.opponentSuperhero = repository.heroes.last
         }
         .navigationBarTitle("Choose your opponent", displayMode: .inline)
@@ -56,8 +62,8 @@ struct SelectOpponentView: View {
                                 }
             .sheet(isPresented: $isShowingAddNewHero,
                    onDismiss: didDismiss) {
-                AddSuperheroView(repository: repository)
-                    .preferredColorScheme(.dark)
+               // AddSuperheroView(repository: repository)
+                 //   .preferredColorScheme(.dark)
             }
         )
         
@@ -68,7 +74,7 @@ struct SelectOpponentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SelectOpponentView_Previews: PreviewProvider {
     static var previews: some View {
         SelectOpponentView()
     }

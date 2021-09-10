@@ -13,7 +13,7 @@ struct BattleView: View {
     // HINT: this thing will fire an event every 2.5 seconds. It's working, no need to fix
     private let timer = Timer.publish(every: 2.5, on: .main, in: .common).autoconnect()
     
-    private var viewModel: BattleViewModel
+    @ObservedObject private var viewModel: BattleViewModel
     
     init(you: Superhero, opponent: Superhero) {
         viewModel = BattleViewModel(you: you, opponent: opponent)
@@ -24,7 +24,7 @@ struct BattleView: View {
             Color("standardBackground").edgesIgnoringSafeArea(.all)
             
             VStack {
-                SuperViewProfileCompactView(superhero: viewModel.opponent, health: $viewModel.opponentHeath)
+                SuperViewProfileCompactView(superhero: viewModel.opponent, health: $viewModel.opponentHealth)
                     .frame(width: 200.0)
                 
                 Spacer()
@@ -42,7 +42,7 @@ struct BattleView: View {
                 
                 Spacer()
                 
-                SuperViewProfileCompactView(superhero: viewModel.you, health: viewModel.yourHeath)
+                SuperViewProfileCompactView(superhero: viewModel.you, health: $viewModel.yourHealth)
                     .frame(width: 200.0)
             }
             .padding()

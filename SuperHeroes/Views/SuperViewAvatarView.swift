@@ -53,6 +53,6 @@ struct SuperViewAvatarView_Previews: PreviewProvider {
             color: 0xFA5311,
             attack: 51,
             speed: 32,
-            defence: 37)!)
+            defence: 37))
     }
 }

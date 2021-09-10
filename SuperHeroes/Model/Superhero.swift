@@ -8,8 +8,10 @@
 import Foundation
 
 
+
 // TODO: From the looks of things, this Struct is missing some crucial protocols to confirm 😰
-struct Superhero {
+struct Superhero: Equatable {
+    
     static let MAX_SKILL_VALUE: Int = 60
     static let TOTAL_OF_SKILLS_VALUE: Int = 100
     static let TOTAL_HEATH: Int = 150
