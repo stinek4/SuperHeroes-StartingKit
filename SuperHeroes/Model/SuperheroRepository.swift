@@ -7,14 +7,17 @@
 
 import Foundation
 
-class SuperheroRepository {
+class SuperheroRepository: ObservableObject {
     
-    var heroes: [Superhero]
+    
+    var heroes: [Superhero] = []
     
     init() {
-        // TODO: oh no.. All the new heroes we add to the app - disappear after app-restart
-        // What can we do with it???
-        // HINT: How about UserDefaults & homeworks' read-assignment?
+        if let storedHeroes = UserDefaults.standard.array(forKey: "heroHistory") as? [Superhero]{
+            heroes = storedHeroes
+        }else{
+            heroes = []
+        }
         
         heroes = SuperheroRepository.provideDefaultSuperheroes()
     }
@@ -24,12 +27,17 @@ class SuperheroRepository {
     }
     
     func previousSuperhero(_ currentSuperhero: Superhero?) -> Superhero? {
-        // TODO: Oh.. Konstantin forgot to implement yet another method ☹️
+        guard let _currentSuperhero = currentSuperhero else{
+            return nil}
+        if let index = heroes.firstIndex(of: _currentSuperhero), 0 < index{
+            return heroes[index - 1]
+        }
+        return nil
     }
     
     func nextSuperhero(_ currentSuperhero: Superhero?) -> Superhero? {
-        guard let currentSuperhero = currentSuperhero else { return nil }
-        if let index = heroes.firstIndex(of: currentSuperhero), index < heroes.count - 1 {
+        guard let _currentSuperhero = currentSuperhero else { return nil }
+        if let index = heroes.firstIndex(of: _currentSuperhero), index < heroes.count - 1 {
             return heroes[index + 1]
         }
         
@@ -45,11 +53,11 @@ extension SuperheroRepository {
                           color: 0xFA5311,
                           attack: 51,
                           speed: 12,
-                          defence: 370),
+                          defence: 37),
                 Superhero(name: "Dr. Doom",
                           avatarUrl: "doctordoom",
                           color: 0x333333,
-                          attack: 600,
+                          attack: 60,
                           speed: 10,
                           defence: 30),
                 Superhero(name: "Gambit",
